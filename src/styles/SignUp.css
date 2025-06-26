@@ -1,0 +1,103 @@
+.signup-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #0f9d58, #034d27);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Reuse header and footer styles from welcome.css */
+  .welcome-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  
+  .welcome-logo {
+    height: 50px;
+    margin-right: 15px;
+    animation: rotateLogo 4s linear infinite;
+  }
+  
+  @keyframes rotateLogo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .welcome-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .welcome-footer {
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #dcdcdc;
+  }
+  
+  /* Signup form styles */
+  .signup-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  
+  .signup-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 15px;
+  }
+  
+  .signup-form input,
+  .signup-form select {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+  }
+  
+  .signup-btn {
+    background-color: #34a853;
+    color: white;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .signup-btn:hover {
+    background-color: #2b8f46;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .signup-form {
+      width: 90%;
+    }
+  
+    .signup-title {
+      font-size: 1.5rem;
+    }
+  }
+  

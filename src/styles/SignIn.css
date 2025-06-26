@@ -1,0 +1,95 @@
+/* Overall layout */
+.signin-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #0f9d58, #034d27);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Header (without logo) */
+  .signin-header {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .welcome-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  /* Sign-in form container */
+  .signin-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  
+  /* Title above form */
+  .signin-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  /* Form styles */
+  .signin-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 15px;
+  }
+  
+  .signin-form input {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+  }
+  
+  /* Button styles */
+  .signin-btn {
+    background-color: #34a853;
+    color: white;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signin-btn:hover {
+    background-color: #2b8f46;
+  }
+  
+  /* Footer */
+  .welcome-footer {
+    background-color: rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #dcdcdc;
+  }
+  
+  /* Responsive for small screens */
+  @media (max-width: 768px) {
+    .signin-form {
+      width: 90%;
+    }
+  
+    .signin-title {
+      font-size: 1.5rem;
+    }
+  }
+  
