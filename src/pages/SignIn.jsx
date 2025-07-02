@@ -11,7 +11,7 @@ export default function SignIn() {
     e.preventDefault();
     const data = { username, password };
 
-    const resp = await fetch("http://localhost:8080/signin", {
+    const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

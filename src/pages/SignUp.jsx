@@ -14,7 +14,7 @@ export default function SignUp() {
     e.preventDefault();
     const user = { username, password, role, email, mobile };
 
-    const resp = await fetch("http://localhost:8080/signup", {
+    const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

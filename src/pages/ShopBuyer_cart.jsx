@@ -9,7 +9,7 @@ export default function ShopBuyer_cart() {
   const username = localStorage.getItem("username");
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getCartItems/${username}`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/getCartItems/${username}`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
@@ -36,7 +36,7 @@ export default function ShopBuyer_cart() {
 
   const handlePayment = async () => {
     try {
-      const response = await fetch("http://localhost:8080/payment/create", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payment/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -65,7 +65,7 @@ export default function ShopBuyer_cart() {
       cashfree.checkout({
         paymentSessionId,
         redirectTarget: "_self",  // Change this line
-        returnUrl: "http://localhost:5173/paymentsuccess" // Add this line
+        returnUrl: `${window.location.origin}/paymentsuccess` // Add this line
       });
 
     } catch (error) {

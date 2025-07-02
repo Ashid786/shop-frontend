@@ -5,21 +5,15 @@ export default function Customer_cart() {
   const username = localStorage.getItem("username");
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  // paymentSessionIdRef is no longer strictly needed if not confirming order immediately here
-  // const paymentSessionIdRef = useRef(null); 
 
   useEffect(() => {
     if (!username) {
-      // Use a custom modal or message box instead of alert
-      // For now, using console.error as per previous instructions for non-alert
       console.error("No user logged in. Please log in to view your cart.");
-      // Optionally redirect to login page
-      // window.location.href = "/login";
       return;
     }
 
     // Fetch customer cart items from the backend
-    fetch(`http://localhost:8080/customer/cart/${username}`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/customer/cart/${username}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -33,8 +27,6 @@ export default function Customer_cart() {
       .catch((error) => {
         console.error("Error fetching cart items:", error);
         setLoading(false);
-        // Display user-friendly error message
-        // Instead of alert, you might update a state to show a message on UI
       });
   }, [username]); // Dependency array includes username to refetch if it changes
 
@@ -59,7 +51,7 @@ export default function Customer_cart() {
 
     try {
       // Make a POST request to your backend to create a Cashfree payment session
-      const response = await fetch("http://localhost:8080/payment/create", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payment/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -77,9 +69,6 @@ export default function Customer_cart() {
 
       const data = await response.json();
       const paymentSessionId = data.paymentSessionId;
-      // paymentSessionIdRef.current = paymentSessionId; // No longer strictly needed here
-
-      // Store necessary info in localStorage for the PaymentSuccess page
       localStorage.setItem("lastPaymentSessionId", paymentSessionId);
       localStorage.setItem("lastFinalAmount", totalAmount); // Store the total amount
 
@@ -92,24 +81,15 @@ export default function Customer_cart() {
 
       // Initialize Cashfree SDK in sandbox mode
       const cashfree = new window.Cashfree({ mode: "sandbox" });
-
-      // Initiate Cashfree checkout
-      // redirectTarget: "_self" ensures the current window is used for redirection
-      // returnUrl: specifies where Cashfree should redirect after payment completion
       cashfree.checkout({
         paymentSessionId,
         redirectTarget: "_self",
-        returnUrl: "http://localhost:5173/paymentsuccess", // Redirect to PaymentSuccess page
+        returnUrl: `${window.location.origin}/paymentsuccess` // Redirect to PaymentSuccess page
       });
     } catch (error) {
       console.error("Payment initiation error:", error);
-      // Display a user-friendly error message on the UI
-      // Example: setErrorMessage("Payment initiation failed. Please try again.");
     }
   };
-
-  // The useEffect block that was here to confirm orders has been removed.
-  // The PaymentSuccess page will now handle confirming the order with the backend.
 
   return (
     <div className="customer-cart-container">

@@ -28,7 +28,7 @@ export default function PaymentSuccess() {
     }
 
     // Call backend to confirm order, send email, and clear cart
-    fetch("http://localhost:8080/order/confirm", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/order/confirm`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -72,15 +72,6 @@ export default function PaymentSuccess() {
   // Function to handle the "OK" button click on the custom modal
   const handleModalConfirm = () => {
     setShowModal(false); // Hide the modal
-
-    // Get the payment origin from localStorage (it should have been set by the cart component)
-    // We re-read it here in case the useEffect's local variable is not up-to-date,
-    // though it should ideally be cleared in the useEffect.
-    // For robust handling, we will rely on the `paymentOrigin` that was retrieved at the start
-    // or infer based on a cleared localStorage for a fresh state.
-    // However, for clean logic, assume paymentOrigin is already handled by the useEffect for clearing.
-
-    // Determine redirection based on the modal type (success/error)
     if (modalType === "success") {
       // Check the paymentOrigin flag to redirect to the correct home page
       const paymentOriginAfterConfirmation = localStorage.getItem("paymentOrigin"); // Re-check if needed, though cleared above

@@ -28,14 +28,14 @@ export default function Admin_home() {
     if (categoryFilter) params.append("category", categoryFilter);
     if (sortBy) params.append("sort", sortBy);
 
-    const res = await fetch(`http://localhost:8080/products/search?${params}`);
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/search?${params}`);
     const data = await res.json();
     setProducts(data);
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
-    await fetch(`http://localhost:8080/deleteProduct/${id}`, { method: "DELETE" });
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/deleteProduct/${id}`, { method: "DELETE" });
     fetchProducts();
   };
 
@@ -53,8 +53,8 @@ export default function Admin_home() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const url = isUpdateMode
-      ? `http://localhost:8080/updateProduct/${form.id}`
-      : "http://localhost:8080/addProduct";
+      ? `${import.meta.env.VITE_BACKEND_URL}/updateProduct/${form.id}`
+      : `${import.meta.env.VITE_BACKEND_URL}/addProduct`;
     const method = isUpdateMode ? "PUT" : "POST";
 
     const res = await fetch(url, {

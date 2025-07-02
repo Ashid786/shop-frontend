@@ -22,7 +22,7 @@ export default function Customer_home() {
     if (category) params.append("category", category);
     if (sort) params.append("sort", sort);
 
-    fetch(`http://localhost:8080/products/search?${params}`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/products/search?${params}`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   };
@@ -40,7 +40,7 @@ export default function Customer_home() {
       quantity,
     };
 
-    const res = await fetch("http://localhost:8080/customer/addToCart", {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/customer/addToCart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
