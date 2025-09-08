@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/AdminHome.css";
+import { http } from "../services/api";
 
 export default function Admin_home() {
   const [products, setProducts] = useState([]);
@@ -28,14 +29,14 @@ export default function Admin_home() {
     if (categoryFilter) params.append("category", categoryFilter);
     if (sortBy) params.append("sort", sortBy);
 
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/search?${params}`);
+    const res = await http(`/products/search?${params.toString()}`);
     const data = await res.json();
     setProducts(data);
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
-    await fetch(`${import.meta.env.VITE_BACKEND_URL}/deleteProduct/${id}`, { method: "DELETE" });
+    await http(`/deleteProduct/${id}`, { method: "DELETE" });
     fetchProducts();
   };
 
@@ -52,12 +53,10 @@ export default function Admin_home() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const url = isUpdateMode
-      ? `${import.meta.env.VITE_BACKEND_URL}/updateProduct/${form.id}`
-      : `${import.meta.env.VITE_BACKEND_URL}/addProduct`;
+    const url = isUpdateMode ? `/updateProduct/${form.id}` : "/addProduct";
     const method = isUpdateMode ? "PUT" : "POST";
 
-    const res = await fetch(url, {
+    const res = await http(url, {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
@@ -72,7 +71,6 @@ export default function Admin_home() {
 
   return (
     <div className="admin-home">
-      {/* ✅ Header with welcome message */}
       <header className="admin-header">
         <div className="welcome-text">Welcome Admin: {username}</div>
 
@@ -109,7 +107,6 @@ export default function Admin_home() {
         </div>
       </header>
 
-      {/* Product Table */}
       <div className="product-table">
         {products.length === 0 ? (
           <p>No products found.</p>
