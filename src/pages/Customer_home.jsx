@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import "../styles/customer_home.css";
+import "../styles/Customer_home.css";
 
 import { http } from "../services/api";
 
